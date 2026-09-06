@@ -71,9 +71,11 @@ La receta no se conoce necesariamente desde el principio. Se construye **iterati
 
 Algunos ejemplos de la guía contienen comandos potencialmente maliciosos utilizados para explicar técnicas habituales de **post-explotación, ejecución de código y extracción de credenciales**.
 
-Estos ejemplos tienen únicamente una finalidad educativa y de análisis.
+> [!WARNING]
+> Estos ejemplos tienen únicamente una finalidad educativa y de análisis.
 
-No se recomienda ejecutar comandos desconocidos fuera de un entorno controlado.
+> [!CAUTION]
+> No se recomienda ejecutar comandos desconocidos fuera de un entorno controlado.
 
 ## 🛠️ Herramienta
 
