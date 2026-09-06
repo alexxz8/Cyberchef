@@ -10,7 +10,6 @@ El objetivo no es únicamente aprender qué operaciones existen, sino aprender a
 
 
 ## 🧠 Contenido
-
 La guía cubre, entre otros, los siguientes conceptos:
 
 - Introducción a CyberChef
