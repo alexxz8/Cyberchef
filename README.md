@@ -8,9 +8,6 @@ Esta guía está enfocada principalmente a personas que están empezando a utili
 
 El objetivo no es únicamente aprender qué operaciones existen, sino aprender a **razonar qué operación utilizar en cada momento**, identificando patrones, indicadores y pistas presentes en los datos.
 
-La idea principal es:
-
-> **Observa → formula una hipótesis → prueba una operación → analiza el resultado → confirma o descarta la hipótesis → repite.**
 
 ## 🧠 Contenido
 
