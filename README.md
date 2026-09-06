@@ -40,7 +40,7 @@ La guía cubre, entre otros, los siguientes conceptos:
 - Análisis de comandos ofuscados
 - Identificación de comandos y comportamientos sospechosos
 
-## 🔎 Enfoque
+🔎 Enfoque
 
 Una cadena ofuscada no siempre indica directamente qué método se ha utilizado.
 
