@@ -1,4 +1,3 @@
-````markdown
 # CyberChef
 
 Guía práctica para aprender a utilizar **CyberChef** para analizar, decodificar y desofuscar cadenas y comandos.
@@ -28,7 +27,7 @@ La guía cubre, entre otros, los siguientes conceptos:
 - ROT13 y otras sustituciones
 - URL Encoding
 - Compresión y descompresión
-- File signatures / Magic Bytes
+- File Signatures / Magic Bytes
 - Reverse
 - XOR
 - Identificación de patrones
@@ -40,23 +39,19 @@ La guía cubre, entre otros, los siguientes conceptos:
 - Análisis de comandos ofuscados
 - Identificación de comandos y comportamientos sospechosos
 
-🔎 Enfoque
+## 🔎 Enfoque
 
 Una cadena ofuscada no siempre indica directamente qué método se ha utilizado.
 
 Por ejemplo, una cadena formada únicamente por:
 
-```text
-48656C6C6F
-````
+`48656C6C6F`
 
 puede hacer sospechar que se trata de hexadecimal.
 
 Mientras que una cadena como:
 
-```text
-SGVsbG8gV29ybGQ=
-```
+`SGVsbG8gV29ybGQ=`
 
 presenta características compatibles con Base64.
 
@@ -68,21 +63,7 @@ Se incluyen ejemplos de cadenas con varias capas de ofuscación o codificación.
 
 Un proceso puede requerir varias operaciones consecutivas, por ejemplo:
 
-```text
-ROT13
-   ↓
-From Base64
-   ↓
-Gunzip
-   ↓
-From Binary
-   ↓
-From Base64
-   ↓
-From Hex
-   ↓
-Comando
-```
+**ROT13 → From Base64 → Gunzip → From Binary → From Base64 → From Hex → Comando**
 
 La receta no se conoce necesariamente desde el principio. Se construye **iterativamente**, utilizando el resultado de cada operación como una nueva pista.
 
@@ -96,9 +77,7 @@ No se recomienda ejecutar comandos desconocidos fuera de un entorno controlado.
 
 ## 🛠️ Herramienta
 
-La guía utiliza:
-
-* [CyberChef](https://gchq.github.io/CyberChef/)
+La guía utiliza **[CyberChef](https://gchq.github.io/CyberChef/)**.
 
 CyberChef es una herramienta web desarrollada por **GCHQ** que permite realizar diferentes operaciones sobre datos mediante la creación de recetas.
 
@@ -116,21 +95,10 @@ Es decir, aprender a **pensar durante el proceso de análisis**, no simplemente 
 
 ## 📚 Estructura
 
-```text
-Cyberchef/
-│
-├── README.md
-└── Guia/
-    └── CyberChef.pdf / CyberChef.md
-```
+El repositorio contiene la guía de CyberChef junto con este README.
 
-> La estructura puede variar dependiendo del formato utilizado para publicar la guía.
+La documentación principal se encuentra en la carpeta correspondiente a la guía.
 
----
-
-### 📌 Nota
+## 📌 Nota
 
 Esta guía está orientada al aprendizaje y al análisis defensivo dentro del ámbito de la ciberseguridad.
-
-```
-```
