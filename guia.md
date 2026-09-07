@@ -226,9 +226,9 @@ Con la práctica, se aprende a reconocer una codificación solo con mirar la for
 
 ### Mini-caso práctico adicional
 
-Para afianzar el proceso, veamos una cadena corta y razonemos en voz alta como lo haría un analista:
+Para afianzar el proceso, veamos una cadena corta y razonemos como lo haría un analista:
 
-SGVsbG8gU09D
+`SGVsbG8gU09D`
 
 1. **Observar:** cadena corta, alfabeto alfanumérico, sin `=` al final pero longitud múltiplo de 4 → compatible con Base64.
 2. **Hipótesis:** Base64.
