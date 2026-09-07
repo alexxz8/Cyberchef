@@ -113,9 +113,8 @@ Nos damos cuenta de que no termina de funcionar, hay algo aquí que se nos escap
 
 Si nos fijamos, al seleccionar el texto en el cuadro de Input, también se marca la selección en el cuadro de Output. Esto no pasa con los dos `==` del final. Esto se debe a que, en Base64, `=` se utiliza como *padding* (relleno) para completar la longitud de la cadena.
 
-Si observamos los caracteres, podemos apreciar que las letras parecen haber sido sustituidas sistemáticamente por otras. Esto puede ser indicativo de una rotación alfabética, como **ROT13**.
-
-Esto sugiere lo siguiente: *"Rotación"*.
+Si observamos los caracteres, podemos apreciar que las letras parecen haber sido sustituidas sistemáticamente por otras. Esto sugiere lo siguiente: *"Rotación"*.
+Puede ser indicativo de una rotación alfabética, como **ROT13**.
 
 **3.** Probamos con la operación **"ROT13"** pero colocada **ANTES** del "From Base64".
 
