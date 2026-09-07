@@ -100,3 +100,5 @@ La documentación principal se encuentra en la carpeta correspondiente a la guí
 ## 📌 Nota
 
 Esta guía está orientada al aprendizaje y al análisis defensivo dentro del ámbito de la ciberseguridad.
+
+Leer guia.md para empezar.
