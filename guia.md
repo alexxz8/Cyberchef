@@ -238,6 +238,7 @@ Para afianzar el proceso, veamos una cadena corta y razonemos como lo haría un 
 6. **Validar:** no hace falta seguir iterando, el resultado final es texto plano coherente.
 
 Este mismo razonamiento, aplicado varias veces en cadena, es exactamente lo que hicimos en el "Ejemplo real": cada operación revela una nueva capa, y cada capa nos da pistas (un nuevo patrón, una nueva cabecera) sobre cuál debe ser la siguiente operación.
+
 ---
 
 ## [EN DESARROLLO]
