@@ -1,6 +1,6 @@
 # CyberChef
 
-En esta guía se describe el paso a paso para descifrar un comando ofuscado. Veremos las diferentes operaciones necesarias para construir la receta que nos permitirá ver el contenido de los archivos ofuscados y determinar su intencionalidad gracias a revelar las acciones que ejecuta y dejándolas desnudas ante el ojo humano.
+En esta guía se describe el paso a paso para descifrar un comando ofuscado. Veremos las diferentes operaciones necesarias para construir la receta que nos permitirá ver el contenido de los archivos ofuscados y determinar su intencionalidad, dejando al descubierto las acciones que ejecuta.
 
 🔗 **Link oficial a CyberChef:** [https://gchq.github.io/CyberChef/](https://gchq.github.io/CyberChef/)
 
@@ -24,7 +24,7 @@ Una vez comprendido esto, vamos a ver un ejemplo sencillo para entender el compo
 **1.** Escribimos en el Input:
 
 ```
-Let's cook
+Let's cook.
 ```
 
 Veremos que en el Output nos devuelve lo mismo ya que no hemos aplicado ninguna operación en nuestra receta.
@@ -83,7 +83,7 @@ Podemos ver que ha hecho un intento bastante bueno para desofuscar nuestro coman
 
 Hemos construido un comando ofuscado partiendo desde `Let's cook.` Y después lo hemos desofuscado de nuevo, pero esta vez aprendiendo a usar la función "Magic".
 
-Si nos fijamos, vemos que al ofuscarlo, los comandos tienen un cierto orden, y al desofuscarlo el orden se invierte, ya que es el proceso contrario.
+Si nos fijamos, vemos que al ofuscarlo, las operaciones tienen un cierto orden, y al desofuscarlo el orden se invierte, ya que es el proceso contrario.
 
 ---
 
@@ -113,9 +113,8 @@ Nos damos cuenta de que no termina de funcionar, hay algo aquí que se nos escap
 
 Si nos fijamos, al seleccionar el texto en el cuadro de Input, también se marca la selección en el cuadro de Output. Esto no pasa con los dos `==` del final. Esto se debe a que, en Base64, `=` se utiliza como *padding* (relleno) para completar la longitud de la cadena.
 
-Si observamos los caracteres, podemos apreciar que las letras parecen haber sido sustituidas sistemáticamente por otras. Esto puede ser indicativo de una rotación alfabética, como **ROT13**.
-
-Esto sugiere lo siguiente: *"Rotación"*.
+Si observamos los caracteres, podemos apreciar que las letras parecen haber sido sustituidas sistemáticamente por otras. Esto sugiere lo siguiente: *"Rotación"*.
+Puede ser indicativo de una rotación alfabética, como **ROT13**.
 
 **3.** Probamos con la operación **"ROT13"** pero colocada **ANTES** del "From Base64".
 
@@ -210,7 +209,7 @@ Este proceso nos permite analizar cadenas desconocidas sin depender de conocer p
 
 ### Analizar el comando desofuscado
 
-También separaría en una sección posterior **"Indicadores que debemos buscar en el resultado final"**, donde hablar de cosas como:
+Sección: **"Indicadores que debemos buscar en el resultado final"**, donde hablar de cosas como:
 
 - PowerShell / cmd
 - IEX
@@ -222,4 +221,4 @@ También separaría en una sección posterior **"Indicadores que debemos buscar 
 - Comandos de descarga
 - etc.
 
-Eso ya conecta directamente CyberChef con análisis de malware/alertas y trabajo de SOC.
+Esto ya conecta directamente CyberChef con análisis de malware/alertas y trabajo de SOC.
