@@ -24,7 +24,7 @@ Una vez comprendido esto, vamos a ver un ejemplo sencillo para entender el compo
 **1.** Escribimos en el Input:
 
 ```
-Let's cook
+Let's cook.
 ```
 
 Veremos que en el Output nos devuelve lo mismo ya que no hemos aplicado ninguna operación en nuestra receta.
