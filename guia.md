@@ -209,7 +209,7 @@ Este proceso nos permite analizar cadenas desconocidas sin depender de conocer p
 
 ### Analizar el comando desofuscado
 
-También separaría en una sección posterior **"Indicadores que debemos buscar en el resultado final"**, donde hablar de cosas como:
+Sección: **"Indicadores que debemos buscar en el resultado final"**, donde hablar de cosas como:
 
 - PowerShell / cmd
 - IEX
