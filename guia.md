@@ -221,4 +221,4 @@ Sección: **"Indicadores que debemos buscar en el resultado final"**, donde habl
 - Comandos de descarga
 - etc.
 
-Eso ya conecta directamente CyberChef con análisis de malware/alertas y trabajo de SOC.
+Esto ya conecta directamente CyberChef con análisis de malware/alertas y trabajo de SOC.
