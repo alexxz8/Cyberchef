@@ -83,7 +83,7 @@ Podemos ver que ha hecho un intento bastante bueno para desofuscar nuestro coman
 
 Hemos construido un comando ofuscado partiendo desde `Let's cook.` Y después lo hemos desofuscado de nuevo, pero esta vez aprendiendo a usar la función "Magic".
 
-Si nos fijamos, vemos que al ofuscarlo, los comandos tienen un cierto orden, y al desofuscarlo el orden se invierte, ya que es el proceso contrario.
+Si nos fijamos, vemos que al ofuscarlo, las operaciones tienen un cierto orden, y al desofuscarlo el orden se invierte, ya que es el proceso contrario.
 
 ---
 
