@@ -1,6 +1,6 @@
 # CyberChef
 
-En esta guía se describe el paso a paso para descifrar un comando ofuscado. Veremos las diferentes operaciones necesarias para construir la receta que nos permitirá ver el contenido de los archivos ofuscados y determinar su intencionalidad gracias a revelar las acciones que ejecuta y dejándolas desnudas ante el ojo humano.
+En esta guía se describe el paso a paso para descifrar un comando ofuscado. Veremos las diferentes operaciones necesarias para construir la receta que nos permitirá ver el contenido de los archivos ofuscados y determinar su intencionalidad, dejando al descubierto las acciones que ejecuta.
 
 🔗 **Link oficial a CyberChef:** [https://gchq.github.io/CyberChef/](https://gchq.github.io/CyberChef/)
 
